@@ -64,7 +64,7 @@ public class JTabbedPaneDemo extends JFrame implements ActionListener{
         p1.add(password);
         p1.add(logIn);
         String user = "Mukesh" ;
-        String pass = "mukesh";
+        String pass = "mukesh";//hello
 
         t1.addTab("Welcome", p1);
         add(t1);
