@@ -1,12 +1,14 @@
 package com.company;
 import java.sql.*;   // Use 'Connection', 'Statement' and 'ResultSet' classes in java.sql package
 
+import javax.swing.*;
+
 // JDK 1.7 and above
-public class sql {   // Save as "JdbcSelectTest.java"
+public class sql  {   // Save as "JdbcSelectTest.java"
 
     public sql() {
+               JTabbedPaneDemo app = new JTabbedPaneDemo();
 
-            JTabbedPaneDemo t1 = new JTabbedPaneDemo();
             try (
                     // Step 1: Allocate a database 'Connection' object
                     Connection conn = DriverManager.getConnection(
@@ -34,7 +36,7 @@ public class sql {   // Save as "JdbcSelectTest.java"
                     //int    qty   = rset.getInt("qty");
                     //System.out.println(id + ", " + price );
 
-                    t1.questionEdit.setText(id + " " + price);
+                    app.questionEdit.setText(id + " " + price);
                     ++rowCount;
                 }
                 System.out.println("Total number of records = " + rowCount);
