@@ -8,13 +8,15 @@ package com.company;
 
 
 public class JTabbedPaneDemo extends JFrame implements ActionListener{
+
     private JTabbedPane t1 = new JTabbedPane();
     JPanel p1, p2, p3;
     private Container  c1;
     JButton logIn ,viewTest,back1,back2,exportFile, addquestion , editquestion ,savequestion;
     JLabel  passWord, welCome ,userName , choosesubject ;
     Choice chooseSubject ;
-    JTextField username , questionEdit;
+    JTextField username ;
+     JTextArea questionEdit;
     JRadioButton mcq , truefalse , fillinblank ;
     JPasswordField password;
 
@@ -22,6 +24,17 @@ public class JTabbedPaneDemo extends JFrame implements ActionListener{
     int count = 0;
     private char getpass[];
     public JTabbedPaneDemo() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         setup();
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +53,7 @@ public class JTabbedPaneDemo extends JFrame implements ActionListener{
 
 
         c1 = getContentPane();
-
+       c1.setBackground(Color.lightGray);
         p1.setLayout(new FlowLayout());
 
         userName = new JLabel("UserName");
@@ -82,6 +95,7 @@ public class JTabbedPaneDemo extends JFrame implements ActionListener{
                     setResizable(false);
                     t1.remove(p1);
                     addQuestion app1 = new addQuestion();
+                    new sql();
                     username.setText("");
                     password.setText("");
                 }
@@ -107,7 +121,7 @@ public class JTabbedPaneDemo extends JFrame implements ActionListener{
             addquestion =  new JButton("Add Question");
             editquestion =  new JButton("edit QUESTION");
             savequestion =  new JButton("Save Question");
-            questionEdit = new JTextField(50);
+            questionEdit = new JTextArea();
             mcq = new JRadioButton("MCQ");
             truefalse = new JRadioButton("True/False");
             fillinblank = new JRadioButton("Fill In the blank");
@@ -138,7 +152,7 @@ public class JTabbedPaneDemo extends JFrame implements ActionListener{
 
 
             back1.setBounds(90,500 ,50 ,20);
-            viewTest.setBounds(90,500 ,50 ,20);
+            viewTest.setBounds(100,550 ,50 ,20);
 
             p2.add( addquestion );
             p2.add( editquestion);

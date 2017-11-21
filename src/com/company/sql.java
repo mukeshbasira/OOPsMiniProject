@@ -3,40 +3,45 @@ import java.sql.*;   // Use 'Connection', 'Statement' and 'ResultSet' classes in
 
 // JDK 1.7 and above
 public class sql {   // Save as "JdbcSelectTest.java"
-    public static void main(String[] args) {
-        try (
-                // Step 1: Allocate a database 'Connection' object
-                Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/ebookshop?useSSL=false", "myuser", "xxxx");
-                // MySQL: "jdbc:mysql://hostname:port/databaseName", "username", "password"
 
-                // Step 2: Allocate a 'Statement' object in the Connection
-                Statement stmt = conn.createStatement();
-        ) {
-            // Step 3: Execute a SQL SELECT query, the query result
-            //  is returned in a 'ResultSet' object.
-            String strSelect = "select title, price, qty from books";
-            System.out.println("The SQL query is: " + strSelect); // Echo For debugging
-            System.out.println();
+    public sql() {
 
-            ResultSet rset = stmt.executeQuery(strSelect);
+            JTabbedPaneDemo t1 = new JTabbedPaneDemo();
+            try (
+                    // Step 1: Allocate a database 'Connection' object
+                    Connection conn = DriverManager.getConnection(
+                            "jdbc:mysql://localhost:3306/javaproject", "mukesh", "mukesh");
+                    // MySQL: "jdbc:mysql://hostname:port/databaseName", "username", "password"
 
-            // Step 4: Process the ResultSet by scrolling the cursor forward via next().
-            //  For each row, retrieve the contents of the cells with getXxx(columnName).
-            System.out.println("The records selected are:");
-            int rowCount = 0;
-            while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                String title = rset.getString("title");
-                double price = rset.getDouble("price");
-                int    qty   = rset.getInt("qty");
-                System.out.println(title + ", " + price + ", " + qty);
-                ++rowCount;
+                    // Step 2: Allocate a 'Statement' object in the Connection
+                    Statement stmt = conn.createStatement();
+            ) {
+                // Step 3: Execute a SQL SELECT query, the query result
+                //  is returned in a 'ResultSet' object.
+                String strSelect = "select id , ans1 from science";
+                System.out.println("The SQL query is: " + strSelect); // Echo For debugging
+                System.out.println();
+
+                ResultSet rset = stmt.executeQuery(strSelect);
+
+                // Step 4: Process the ResultSet by scrolling the cursor forward via next().
+                //  For each row, retrieve the contents of the cells with getXxx(columnName).
+                System.out.println("The records selected are:");
+                int rowCount = 0;
+                while (rset.next()) {   // Move the cursor to the next row, return false if no more row
+                    int id = rset.getInt("id");
+                    String price = rset.getString("ans1");
+                    //int    qty   = rset.getInt("qty");
+                    //System.out.println(id + ", " + price );
+
+                    t1.questionEdit.setText(id + " " + price);
+                    ++rowCount;
+                }
+                System.out.println("Total number of records = " + rowCount);
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-            System.out.println("Total number of records = " + rowCount);
-
-        } catch(SQLException ex) {
-            ex.printStackTrace();
+            // Step 5: Close the resources - Done automatically by try-with-resources
         }
-        // Step 5: Close the resources - Done automatically by try-with-resources
     }
-}
